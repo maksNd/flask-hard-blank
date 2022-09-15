@@ -1,4 +1,5 @@
 from app.setup_db import db
+from marshmallow import Schema, fields
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import Column, Integer, String
 
@@ -15,13 +16,12 @@ class Movie(db.Model):
     director_id = db.Column(db.Integer, db.ForeignKey('director.id'))
 
 
-class Genre(db.Model):
-    __tablename__ = 'genre'
-    id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(100))
-
-
-class Director(db.Model):
-    __tablename__ = 'director'
-    id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(100))
+class MovieSchema(Schema):
+    id = fields.Int()
+    title = fields.Str()
+    description = fields.Str()
+    trailer = fields.Str()
+    year = fields.Int()
+    rating = fields.Int()
+    genre_id = fields.Int()
+    director_id = fields.Int()
