@@ -2,9 +2,10 @@ from flask import Flask
 from flask_restx import Api
 
 from app.config import Config
-from app.views.genre import genre_ns
-from app.views.movie import movie_ns
-from app.views.director import director_ns
+from app.setup_db import db
+from app.class_based_views.genre import genre_ns
+from app.class_based_views.movie import movie_ns
+from app.class_based_views.director import director_ns
 
 
 def create_app(config: Config) -> Flask:
@@ -15,7 +16,7 @@ def create_app(config: Config) -> Flask:
 
 
 def configure_app(application: Flask):
-    # db.init_app(application)
+    db.init_app(application)
     api = Api(application)
     api.add_namespace(movie_ns)
     api.add_namespace(genre_ns)
@@ -27,4 +28,4 @@ if __name__ == '__main__':
     app = create_app(app_config)
     configure_app(app)
 
-    app.run(port=5001)
+    app.run()

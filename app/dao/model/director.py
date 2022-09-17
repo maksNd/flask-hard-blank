@@ -1,5 +1,6 @@
 from app.setup_db import db
 from marshmallow import Schema, fields
+from sqlalchemy import Column
 
 
 class Director(db.Model):

@@ -3,7 +3,7 @@ from sqlalchemy import create_engine, Column, String, Integer, ForeignKey
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker, relationship
 
-engine = create_engine('sqlite:///movies.db')
+engine = create_engine('sqlite:///../movies.db')
 Base = declarative_base()
 session = sessionmaker(bind=engine)
 s = session()

@@ -1,4 +1,4 @@
 class Config:
     DEBUG = True
-    SQLALCHEMY_DATABASE_URI = 'sqlite:///:memory:'
+    SQLALCHEMY_DATABASE_URI = 'sqlite:///app/movies.db'
     SQLALCHEMY_TRACK_MODIFICATIONS = False
