@@ -13,12 +13,13 @@ movie_ns = Namespace('movies')
 @movie_ns.route('/')
 class MoviesView(Resource):
     def get(self):
-        all_movies = movie_service.get_all()
-        return movies_schema.dump(all_movies), 200
+        fields = request.args
+        return movies_schema.dump(
+            movie_service.get_by_fields(**fields)
+        ), 200
 
     def post(self):
-        data = request.json
-        movie_service.add_new(data)
+        movie_service.add_new(request.json)
         return '', 201
 
 
@@ -29,15 +30,11 @@ class MovieView(Resource):
         return movie_schema.dump(movie), 200
 
     def put(self, mid):
-        data = request.json
-        data['mid'] = mid
-        movie_service.update(data)
+        movie_service.update(mid, **request.json)
         return '', 204
 
     def patch(self, mid):
-        data = request.json
-        data['mid'] = mid
-        movie_service.update_partial(data)
+        movie_service.update(mid, **request.json)
         return '', 204
 
     def delete(self, mid):
